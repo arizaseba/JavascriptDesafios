@@ -11,11 +11,12 @@ function CrearCuenta()
             Password = document.getElementById("password").value;
             Object.freeze(Username);
             Object.freeze(Password);
-            alert("Cuenta creada exitosamente");
+            alert("¡Cuenta creada exitosamente!");
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
+            document.getElementById("create").disabled = true;
         }
-        else 
+        else
         {
             alert("Complete los campos");
         }
@@ -33,17 +34,17 @@ function ValidarSesion()
     let pass = document.getElementById("password").value;
     if (user == Username && pass == Password)
     {
-        alert ("¡Sesión iniciada!");
+        alert("¡Sesión iniciada!");
+        //window.location = "#"; //dirige a una pagina despues de iniciar sesión
         return false;
     }
     else if (Username == null && Password == null)
     {
-        alert ("No existe ninguna cuenta creada");
+        alert("No existe ninguna cuenta creada");
     }
     else
     {
         intentos --;
-        alert("Tienes " + intentos + " intentos");
         if (intentos == 0)
         {
             document.getElementById("username").disabled = true;
@@ -51,6 +52,7 @@ function ValidarSesion()
             document.getElementById("submit").disabled = true;
             return false;
         }
+        alert("Tienes " + intentos + " intentos");
     }
 }
 
