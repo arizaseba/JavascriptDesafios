@@ -6,13 +6,17 @@ let validarPass = false;
 user = prompt("Registra tu nombre de Usuario:").toLowerCase();
 pass = prompt("Registra una contraseña:");
 
+function Mensaje(msg) {
+    alert(msg);
+}
+
 do {
     if (!validarUser) {
         if (prompt("Usuario:").toLowerCase() === user) {
             validarUser = true;
         }
         else {
-            alert("⛔ Usuario incorrecto. Intente nuevamente.");
+            Mensaje("⛔ Usuario incorrecto. Intente nuevamente.");
         }
     }
 } while (!validarUser);
@@ -23,9 +27,9 @@ do{
             validarPass = true;
         }
         else {
-            alert("⛔ Contraseña incorrecta. Intente nuevamente.");
+            Mensaje("⛔ Contraseña incorrecta. Intente nuevamente.");
         }
     }
 } while (!validarPass);
 
-alert("✅ ¡Sesion iniciada!"); 
+Mensaje("✅ ¡Sesion iniciada!"); 
