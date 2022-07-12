@@ -1,20 +1,38 @@
 const Usuarios = [];
-
 let validarUser = false;
 let validarPass = false;
+let index = 0;
 
-user = prompt("Registra tu nombre de Usuario:").toLowerCase();
-pass = prompt("Registra una contraseña:");
-Usuarios.push(user);
+class Usuario {
+    constructor(username, password) {
+        this.Username = username;
+        this.Password = password;
+    }
+}
 
 function Mensaje(msg) {
     alert(msg);
 }
 
 do {
+    let user = prompt("Registre su Usuario:").toLowerCase();
+    let pass = prompt("Registre su Contraseña:");
+    let nuevoUsuario = new Usuario(user, pass);
+
+    if (!Usuarios.some(u => u.Username === user)) {
+        Usuarios.push(nuevoUsuario);
+    }
+    else {
+        Mensaje("Usuario ya existente. Ingrese otro por favor.")
+    }
+} while (prompt("¿Desea agregar otro usuario? (S/N)").toLowerCase() === "s");
+
+do {
     if (!validarUser) {
-        if (prompt("Usuario:").toLowerCase() === user) {
+        let str = prompt("Usuario:").toLowerCase();
+        if (Usuarios.filter(u => u.Username === str)) {
             validarUser = true;
+            index = Usuarios.findIndex(u => u.Username === str);
         }
         else {
             Mensaje("⛔ Usuario incorrecto. Intente nuevamente.");
@@ -22,9 +40,10 @@ do {
     }
 } while (!validarUser);
 
-do{
+do {
     if (!validarPass) {
-        if (prompt("Contraseña:") === pass) {
+        let str = prompt("Contraseña:");
+        if (Usuarios.at(index).Password == str) {
             validarPass = true;
         }
         else {
@@ -34,4 +53,5 @@ do{
 } while (!validarPass);
 
 Mensaje("✅ ¡Sesion iniciada!");
+
 console.log(Usuarios)
