@@ -16,11 +16,10 @@ function Mensaje(msg) {
 
 do {
     let user = prompt("Registre su Usuario:").toLowerCase();
-    let pass = prompt("Registre su Contraseña:");
-    let nuevoUsuario = new Usuario(user, pass);
-
+    // busco si el usuario existe en el array y lo agrego si no existe
     if (!Usuarios.some(u => u.Username === user)) {
-        Usuarios.push(nuevoUsuario);
+        let pass = prompt("Registre su Contraseña:");
+        Usuarios.push(new Usuario(user, pass));
     }
     else {
         Mensaje("Usuario ya existente. Ingrese otro por favor.")
@@ -30,6 +29,8 @@ do {
 do {
     if (!validarUser) {
         let str = prompt("Usuario:").toLowerCase();
+        // busco si el usuario existe en el array y lo valido
+        // guardando el index para luego validar la contraseña
         if (Usuarios.filter(u => u.Username === str)) {
             validarUser = true;
             index = Usuarios.findIndex(u => u.Username === str);
@@ -43,6 +44,7 @@ do {
 do {
     if (!validarPass) {
         let str = prompt("Contraseña:");
+        // verifico si la contraseña coincide con el usuario del index
         if (Usuarios.at(index).Password == str) {
             validarPass = true;
         }
