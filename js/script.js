@@ -31,7 +31,7 @@ do {
         let str = prompt("Usuario:").toLowerCase();
         // busco si el usuario existe en el array y lo valido
         // guardando el index para luego validar la contraseña
-        if (Usuarios.filter(u => u.Username === str)) {
+        if (Usuarios.some(u => u.Username === str)) {
             validarUser = true;
             index = Usuarios.findIndex(u => u.Username === str);
         }
