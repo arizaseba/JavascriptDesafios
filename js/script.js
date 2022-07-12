@@ -1,10 +1,11 @@
-let user = "";
-let pass = "";
+const Usuarios = [];
+
 let validarUser = false;
 let validarPass = false;
 
 user = prompt("Registra tu nombre de Usuario:").toLowerCase();
 pass = prompt("Registra una contraseña:");
+Usuarios.push(user);
 
 function Mensaje(msg) {
     alert(msg);
@@ -23,7 +24,7 @@ do {
 
 do{
     if (!validarPass) {
-        if (prompt("Contraseña:") === user) {
+        if (prompt("Contraseña:") === pass) {
             validarPass = true;
         }
         else {
@@ -32,4 +33,5 @@ do{
     }
 } while (!validarPass);
 
-Mensaje("✅ ¡Sesion iniciada!"); 
+Mensaje("✅ ¡Sesion iniciada!");
+console.log(Usuarios)
