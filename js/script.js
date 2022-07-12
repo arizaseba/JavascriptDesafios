@@ -1,7 +1,7 @@
 const Usuarios = [];
 let validarUser = false;
 let validarPass = false;
-let index = 0;
+let index = 0; 
 
 class Usuario {
     constructor(username, password) {
