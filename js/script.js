@@ -19,7 +19,7 @@ do {
 
 do{
     if (!validarPass) {
-        if (prompt("Contraseña:") === user) {
+        if (prompt("Contraseña:") === pass) {
             validarPass = true;
         }
         else {
