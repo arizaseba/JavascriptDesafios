@@ -5,8 +5,8 @@ let index = 0
 
 class Usuario {
     constructor(username, password) {
-        this.Username = username
-        this.Password = password
+        this.username = username
+        this.password = password
     }
 }
 
@@ -14,10 +14,34 @@ function Mensaje(msg) {
     alert(msg)
 }
 
+function ValidarUsuario(usuarioNombre) {
+    // busco si el usuario existe en el array y lo valido
+    if (Usuarios.some(u => u.username === usuarioNombre)) {
+        // guardo el index para luego validar la contraseña
+        index = Usuarios.findIndex(u => u.username === usuarioNombre)
+        return true
+    }
+    else {
+        Mensaje("⛔ Usuario incorrecto. Intente nuevamente.")
+        return false
+    }
+}
+
+function ValidarContrasena(usuarioContrasena) {
+    // verifico si la contraseña coincide con el usuario del index
+    if (Usuarios[index].password === usuarioContrasena) {
+        return true
+    }
+    else {
+        Mensaje("⛔ Contraseña incorrecta. Intente nuevamente.");
+        return false
+    }
+}
+
 do {
     let user = prompt("Registre su Usuario:").toLowerCase()
     // busco si el usuario existe en el array y lo agrego si no existe
-    if (!Usuarios.some(u => u.Username === user)) {
+    if (!Usuarios.some(u => u.username === user)) {
         let pass = prompt("Registre su Contraseña:")
         Usuarios.push(new Usuario(user, pass))
     }
@@ -27,32 +51,12 @@ do {
 } while (prompt("¿Desea agregar otro usuario? (S/N)").toLowerCase() === "s")
 
 do {
-    if (!validarUser) {
-        let str = prompt("Usuario:").toLowerCase()
-        // busco si el usuario existe en el array y lo valido
-        // guardando el index para luego validar la contraseña
-        if (Usuarios.some(u => u.Username === str)) {
-            validarUser = true
-            index = Usuarios.findIndex(u => u.Username === str)
-        }
-        else {
-            Mensaje("⛔ Usuario incorrecto. Intente nuevamente.");
-        }
-    }
+    validarUser = ValidarUsuario(prompt("Usuario:").toLowerCase())
 } while (!validarUser);
 
 do {
-    if (!validarPass) {
-        let str = prompt("Contraseña:")
-        // verifico si la contraseña coincide con el usuario del index
-        if (Usuarios.at(index).Password === str) {
-            validarPass = true
-        }
-        else {
-            Mensaje("⛔ Contraseña incorrecta. Intente nuevamente.");
-        }
-    }
-} while (!validarPass)
+    validarPass = ValidarContrasena(prompt("Contraseña:"))
+} while (!validarPass);
 
 Mensaje("✅ ¡Sesion iniciada!")
 
