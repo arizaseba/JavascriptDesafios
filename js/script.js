@@ -73,7 +73,7 @@ function ValidarSesion()
         }
         else
         {
-            MessageBox("Usuario o contraseña incorrectos.Intente nuevamente.", true)
+            MessageBox("Usuario o contraseña incorrectos. Intente nuevamente.", true)
             document.getElementById("loginUsername").value = ""
             document.getElementById("loginPassword").value = ""
         }
