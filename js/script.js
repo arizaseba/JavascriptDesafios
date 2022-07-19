@@ -1,7 +1,7 @@
 const Usuarios = []
 
 class Usuario {
-    constructor (username, password) {
+    constructor(username, password) {
         this.username = username
         this.password = password
     }
@@ -10,15 +10,12 @@ class Usuario {
 document.getElementById("createForm").style.display = "none"
 document.getElementById("labelResult").style.display = "none"
 
-function MessageBox(mensaje, error) 
-{
-    if (error) 
-    {
+function MessageBox(mensaje, error) {
+    if (error) {
         document.getElementById("labelResult").style.borderColor = "red"
         document.getElementById("labelResult").style.color = "red"
     }
-    else
-    {
+    else {
         document.getElementById("labelResult").style.borderColor = "green"
         document.getElementById("labelResult").style.color = "green"
     }
@@ -26,19 +23,16 @@ function MessageBox(mensaje, error)
     document.getElementById("labelResult").textContent = mensaje
 }
 
-function CrearCuenta()
-{
+function CrearCuenta() {
     let user = document.getElementById("createUsername").value
     let pass = document.getElementById("createPassword").value
- 
-    if (user == "" || pass == "")
-    {
+
+    if (user == "" || pass == "") {
         MessageBox("Complete los campos", true)
         return
     }
 
-    if (!Usuarios.some(u => u.username == user))
-    {
+    if (!Usuarios.some(u => u.username == user)) {
         Usuarios.push(new Usuario(user, pass));
 
         MessageBox("¡Cuenta creada exitosamente!", false)
@@ -48,38 +42,29 @@ function CrearCuenta()
         // mostrar array de usuarios
         console.log(Usuarios)
     }
-    else
-    {
+    else {
         MessageBox(`Ya se ha creado la cuenta ${user}`, true)
     }
 }
 
-function ValidarSesion()
-{
+function ValidarSesion() {
     let user = document.getElementById("loginUsername").value
     let pass = document.getElementById("loginPassword").value
-    const usu = Usuarios.find( u => u.username == user)
+    const usu = Usuarios.find(u => u.username == user)
 
-    if (user == "" || pass == "")
-    {
+    if (user == "" || pass == "") {
         MessageBox("Complete los campos", true)
         return
     }
-    if (usu != null)
-    {
-        if (user == user && pass == usu.password)
-        {
+    if (usu != null) {
+        if (user == user && pass == usu.password) {
             MessageBox("¡Sesión iniciada!", false)
         }
-        else
-        {
+        else {
             MessageBox("Usuario o contraseña incorrectos. Intente nuevamente.", true)
-            document.getElementById("loginUsername").value = ""
-            document.getElementById("loginPassword").value = ""
-        } 
+        }
     }
-    else
-    {
+    else {
         MessageBox(`No existe el usuario ${user}`, true)
     }
 }
