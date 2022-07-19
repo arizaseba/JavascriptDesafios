@@ -88,19 +88,17 @@ function ValidarSesion()
 const loginButton = document.getElementById("loginButton")
 loginButton.addEventListener(("click"), event => {
     event.preventDefault()
-    document.getElementById("labelResult").style.display = "none"
     ValidarSesion()
 })
 
 const createButton = document.getElementById("createButton")
 createButton.addEventListener(("click"), event => {
     event.preventDefault()
-    document.getElementById("labelResult").style.display = "none"
     CrearCuenta()
 })
 
-const formCreate = document.getElementById("labelLogin")
-formCreate.addEventListener(("click"), event => {
+const labelLogin = document.getElementById("labelLogin")
+labelLogin.addEventListener(("click"), event => {
     if (document.getElementById("createForm").style.display == "none") {
         event.preventDefault()
         document.getElementById("loginForm").style.display = "none"
