@@ -10,19 +10,36 @@
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
-        <form class="card p-5 justify-content-center text-center">
-            <h1 class="fs-4 mb-3">Iniciar Sesión</h1>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="username" placeholder="Usuario" required>
-                <label for="username">Usuario</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
-                <label for="password">Contraseña</label>
-            </div>
-            <button type="button" class="btn btn-primary mb-3" id="submit" onclick="ValidarSesion()">Iniciar sesión</button>
-            <button type="button" class="btn btn-secondary mb-3" id="create" onclick="CrearCuenta()">Crear cuenta</button>
-        </form>
+        <div class="card p-5 justify-content-center text-center">
+    		<!-- Formulario para iniciar sesión -->
+            <form id="loginForm">
+                <h1 class="fs-4 mb-3">Iniciar Sesión</h1>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="loginUsername" placeholder="Usuario" required>
+                    <label for="username">Usuario</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" required>
+                    <label for="password">Contraseña</label>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" id="loginButton">Iniciar sesión</button>
+            </form>
+            <!-- Formulario para crear cuentas -->
+            <form id="createForm">
+                <h1 class="fs-4 mb-3">Crear Cuenta</h1>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="createUsername" placeholder="Usuario" required>
+                    <label for="username">Usuario</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="createPassword" placeholder="Contraseña" required>
+                    <label for="password">Contraseña</label>
+                </div>
+                <button type="submit" class="btn btn-secondary mb-3" id="createButton">Crear cuenta</button>
+            </form>
+            <a href="" class="mb-3" id="labelLogin">Crear Cuenta</a>
+            <div class="alert" id="labelResult" role="alert"></div>
+        </div>
     </div>
 </body>
 <script src="./js/script.js"></script>
