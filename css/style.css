@@ -13,3 +13,8 @@ body {
 a {
     text-decoration: none;
 }
+
+.cardLogin {
+    width: 500px;
+    height: 600px;
+}

@@ -1,11 +1,23 @@
-const Usuarios = []
-
 class Usuario {
-    constructor(username, password) {
+    constructor(name, surname, username, password) {
+        this.name = name
+        this.surname = surname
         this.username = username
         this.password = password
     }
 }
+
+const usuariosLS = JSON.parse(localStorage.getItem("Usuarios"))
+const usuarios = []
+
+if (usuariosLS != null) {
+    for (const usu of usuariosLS) {
+        usuarios.push(new Usuario(usu.name, usu.surname, usu.username, usu.password))
+    }
+}
+
+console.log("Usuarios en Local Storage:\n", usuarios)
+
 
 document.getElementById("createForm").style.display = "none"
 document.getElementById("labelResult").style.display = "none"
@@ -23,39 +35,45 @@ function MessageBox(mensaje, error) {
     document.getElementById("labelResult").textContent = mensaje
 }
 
-function CrearCuenta() {
+function crearCuenta() {
+    let name = document.getElementById("createName").value
+    let surname = document.getElementById("createSurname").value
     let user = document.getElementById("createUsername").value
     let pass = document.getElementById("createPassword").value
 
-    if (user == "" || pass == "") {
+    if (name == "" || surname == "" || user == "" || pass == "") {
         MessageBox("Complete los campos", true)
         return
     }
 
-    if (!Usuarios.some(u => u.username == user)) {
-        Usuarios.push(new Usuario(user, pass));
+    if (!usuarios.some(u => u.username == user)) {
+        usuarios.push(new Usuario(name, surname, user, pass));
+        localStorage.setItem("Usuarios", JSON.stringify(usuarios))
 
         MessageBox("¡Cuenta creada exitosamente!", false)
+        document.getElementById("createName").value = ""
+        document.getElementById("createSurname").value = ""
         document.getElementById("createUsername").value = ""
         document.getElementById("createPassword").value = ""
 
         // mostrar array de usuarios
-        console.log(Usuarios)
+        console.log(usuarios)
     }
     else {
-        MessageBox(`Ya se ha creado la cuenta ${user}`, true)
+        MessageBox(`Ya existe el usuario ${user}`, true)
     }
 }
 
-function ValidarSesion() {
+function validarSesion() {
     let user = document.getElementById("loginUsername").value
     let pass = document.getElementById("loginPassword").value
-    const usu = Usuarios.find(u => u.username == user)
 
     if (user == "" || pass == "") {
         MessageBox("Complete los campos", true)
         return
     }
+
+    let usu = usuarios.find(u => u.username == user)
     if (usu != null) {
         if (user == user && pass == usu.password) {
             MessageBox("¡Sesión iniciada!", false)
@@ -65,7 +83,7 @@ function ValidarSesion() {
         }
     }
     else {
-        MessageBox(`No existe el usuario ${user}`, true)
+        MessageBox(`Usuario inexistente ${user}`, true)
     }
 }
 
@@ -73,13 +91,13 @@ function ValidarSesion() {
 const loginButton = document.getElementById("loginButton")
 loginButton.addEventListener(("click"), event => {
     event.preventDefault()
-    ValidarSesion()
+    validarSesion()
 })
 
 const createButton = document.getElementById("createButton")
 createButton.addEventListener(("click"), event => {
     event.preventDefault()
-    CrearCuenta()
+    crearCuenta()
 })
 
 const labelLogin = document.getElementById("labelLogin")
@@ -98,6 +116,8 @@ labelLogin.addEventListener(("click"), event => {
     }
     document.getElementById("loginUsername").value = ""
     document.getElementById("loginPassword").value = ""
+    document.getElementById("createName").value = ""
+    document.getElementById("createSurname").value = ""
     document.getElementById("createUsername").value = ""
     document.getElementById("createPassword").value = ""
     document.getElementById("labelResult").style.display = "none"
